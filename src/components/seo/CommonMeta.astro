@@ -1,0 +1,39 @@
+---
+// CommonMeta.astro - Global/Common meta tags for all pages
+---
+
+<!-- Essential meta tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Security headers -->
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+<!-- Format detection (prevents auto-linking) -->
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="address=no" />
+
+<!-- Mobile web app settings -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+<!-- Prevent indexing of development/staging environments -->
+{import.meta.env.DEV && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- DNS prefetch for performance (update URLs to match your actual external dependencies) -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//www.google-analytics.com" />
+
+<!-- Preconnect to external domains for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Web manifest for PWA -->
+ <!-- <link rel="manifest" href="/manifest.json" /> -->
+
+<!-- RSS feed (uncomment if you have one) -->
+<!-- <link rel="alternate" type="application/rss+xml" title="Your Site RSS" href="/rss.xml" /> -->

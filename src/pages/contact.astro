@@ -1,0 +1,14 @@
+---
+// Import layout
+import BaseLayout from '@/layouts/BaseLayout.astro';
+// Import data
+import { contactMeta, contactSchema } from '@/data/contact/seo'
+import { hero } from '@/data/contact/content'
+// Import components
+import Welcome from '@/components/Welcome.astro';
+---
+
+<BaseLayout metadata={contactMeta} schemaData={contactSchema}>
+  <h1>{hero.heading}</h1>
+  <Welcome />
+</BaseLayout>
