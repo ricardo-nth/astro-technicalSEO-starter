@@ -1,0 +1,16 @@
+---
+// Import layout
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+// Import data
+import { homeMeta, homeSchema } from '@/data/index/seo'
+import {hero} from '@/data/index/content'
+
+// Import components
+//import Hero from '@/components/common/Hero.astro';
+import Welcome from '@/components/Welcome.astro';
+---
+
+<BaseLayout metadata={homeMeta} schemaData={homeSchema}>
+  <Welcome />
+</BaseLayout>
