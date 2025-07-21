@@ -11,8 +11,8 @@
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/sitemap": "^3.4.1",
-    "@astrojs/vercel": "^8.2.1",
-    "astro": "^5.11.0",
+    "@astrojs/vercel": "^8.2.3",
+    "astro": "^5.12.1",
     "astro-compressor": "^1.0.0",
     "astro-robots-txt": "^1.0.0"
   }
