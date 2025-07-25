@@ -6,6 +6,7 @@ import TagManager from '@/components/analytics/TagManager.astro'
 import Meta from '@/components/seo/Meta.astro';
 import Schema from '@/components/seo/Schema.astro';
 import Favicons from '@/components/Favicons.astro';
+import '@/assets/styles/global.css';
 
 // Import components
 //import Nav from '@/components/common/Nav.astro';
@@ -30,6 +31,7 @@ const { metadata = {}, schemaData = [] } = Astro.props;
 	  <Favicons />
     <Meta {...metadata} />
     <Schema schemaData={schemaData} />
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
   </head>
   <body>
     <main>
