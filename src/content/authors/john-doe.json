@@ -1,0 +1,12 @@
+{
+  "name": "John Doe",
+  "role": "Content Writer",
+  "bio": "Sample bio text.",
+  "image": "/placeholder-avatar.jpg",
+  "email": "john@example.com",
+  "social": {
+    "twitter": "https://twitter.com/johndoe",
+    "linkedin": "https://linkedin.com/in/johndoe"
+  },
+  "expertise": ["SEO", "Content Marketing"]
+}

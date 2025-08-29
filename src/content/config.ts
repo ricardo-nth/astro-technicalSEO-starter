@@ -239,6 +239,125 @@ const navigationCollection = defineCollection({
   }),
 });
 
+// New content collections for business expansion
+
+// Authors collection for blog and content authors
+const authorsCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    role: z.string(),
+    bio: z.string(),
+    image: z.string(),
+    email: z.string().email().optional(),
+    social: z.object({
+      twitter: z.string().optional(),
+      linkedin: z.string().optional(),
+      github: z.string().optional(),
+      website: z.string().url().optional(),
+    }).optional(),
+    expertise: z.array(z.string()).optional(),
+  }),
+});
+
+// Team members collection
+const teamCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    role: z.string(),
+    department: z.string().optional(),
+    bio: z.string(),
+    image: z.string(),
+    email: z.string().email().optional(),
+    social: z.object({
+      linkedin: z.string().optional(),
+      twitter: z.string().optional(),
+      github: z.string().optional(),
+      website: z.string().url().optional(),
+    }).optional(),
+    expertise: z.array(z.string()).optional(),
+    orderIndex: z.number().default(0),
+    featured: z.boolean().default(false),
+  }),
+});
+
+// Case studies collection  
+const caseStudiesCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    client: z.string(),
+    industry: z.string(),
+    projectType: z.string(),
+    description: z.string(),
+    challenge: z.string(),
+    solution: z.string(),
+    results: z.array(z.object({
+      metric: z.string(),
+      value: z.string(),
+      improvement: z.string().optional(),
+    })),
+    testimonial: z.object({
+      quote: z.string(),
+      author: z.string(),
+      role: z.string(),
+    }).optional(),
+    images: z.array(z.string()),
+    services: z.array(z.string()), // Link to service IDs
+    dateCompleted: z.string(),
+    featured: z.boolean().default(false),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
+// Blog collection (content type for .md/.mdx files)
+const blogCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    author: z.string(), // Reference to author ID
+    publishDate: z.date(),
+    updateDate: z.date().optional(),
+    category: z.string(),
+    tags: z.array(z.string()),
+    featuredImage: z.string(),
+    readTime: z.number().optional(), // estimated minutes
+    featured: z.boolean().default(false),
+    published: z.boolean().default(true),
+    relatedPosts: z.array(z.string()).optional(), // slugs
+  }),
+});
+
+// Legal pages collection (content type for .md/.mdx files)
+const legalCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    effectiveDate: z.date(),
+    lastUpdated: z.date(),
+    type: z.enum(['privacy', 'terms', 'cookies', 'disclaimer']),
+    jurisdiction: z.string().optional(),
+  }),
+});
+
+// Press/News collection (content type for .md/.mdx files)
+const pressCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishDate: z.date(),
+    type: z.enum(['press-release', 'news', 'award', 'mention']),
+    externalUrl: z.string().url().optional(),
+    publication: z.string().optional(),
+    featured: z.boolean().default(false),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   seo: seoCollection,
@@ -251,4 +370,11 @@ export const collections = {
   testimonials: testimonialsCollection,
   global: globalCollection,
   navigation: navigationCollection,
+  // New content collections
+  authors: authorsCollection,
+  team: teamCollection,
+  'case-studies': caseStudiesCollection,
+  blog: blogCollection,
+  legal: legalCollection,
+  press: pressCollection,
 };

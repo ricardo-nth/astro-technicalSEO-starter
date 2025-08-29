@@ -1,0 +1,14 @@
+{
+  "name": "Bob Wilson",
+  "role": "CTO",
+  "department": "Technology",
+  "bio": "Sample technical bio.",
+  "image": "/placeholder-avatar.jpg",
+  "social": {
+    "linkedin": "https://linkedin.com/in/bobwilson",
+    "github": "https://github.com/bobwilson"
+  },
+  "expertise": ["Web Development", "Architecture"],
+  "orderIndex": 2,
+  "featured": true
+}

@@ -18,14 +18,29 @@ export async function mergeSeoData(pageKey: string) {
 
     // Merge metadata (page overrides global)
     const mergedMeta: MetaData = {
-      ...globalSeo.data.meta,
-      ...(pageSeo?.data?.meta || {})
+      title: globalSeo.data.title,
+      description: globalSeo.data.description,
+      keywords: globalSeo.data.keywords?.join(', '),
+      image: globalSeo.data.ogImage,
+      robots: globalSeo.data.robots,
+      url: globalSeo.data.canonical,
+      author: globalSeo.data.author,
+      // Page-specific overrides
+      ...(pageSeo?.data ? {
+        title: pageSeo.data.title || globalSeo.data.title,
+        description: pageSeo.data.description || globalSeo.data.description,
+        keywords: pageSeo.data.keywords?.join(', ') || globalSeo.data.keywords?.join(', '),
+        image: pageSeo.data.ogImage || globalSeo.data.ogImage,
+        robots: pageSeo.data.robots || globalSeo.data.robots,
+        url: pageSeo.data.canonical || globalSeo.data.canonical,
+        author: pageSeo.data.author || globalSeo.data.author,
+      } : {})
     };
 
     // Merge schema (global first, then page-specific)
     const mergedSchema: SchemaData[] = [
-      ...(globalSeo.data.schema || []),
-      ...(pageSeo?.data?.schema || [])
+      ...(globalSeo.data.schema ? [globalSeo.data.schema] : []),
+      ...(pageSeo?.data?.schema ? [pageSeo.data.schema] : [])
     ];
 
     return {

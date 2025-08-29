@@ -1,0 +1,61 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Build for production
+        run: pnpm run build
+        env:
+          NODE_ENV: production
+          SITE_URL: ${{ vars.SITE_URL }}
+          GTM_ID: ${{ vars.GTM_ID }}
+          GA_ID: ${{ vars.GA_ID }}
+          
+      - name: Deploy to Netlify
+        if: vars.NETLIFY_SITE_ID
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --dir=dist
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
+          
+      - name: Deploy to Vercel
+        if: vars.VERCEL_PROJECT_ID
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ vars.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ vars.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "🚀 Production deployment successful!"
+          echo "Site URL: ${{ vars.SITE_URL }}"
