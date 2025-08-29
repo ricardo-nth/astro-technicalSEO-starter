@@ -14,13 +14,9 @@ import Welcome from '@/components/Welcome.astro';
 // Get merged SEO data
 const { metadata, schemaData } = await mergeSeoData('about');
 
-// Get page content (with fallback)
+// Get page content - Content Collections ensures this exists
 const pageContent = await getEntry('pages', 'about');
-const hero = pageContent?.data?.hero || {
-  heading: "About Our Company",
-  subheading: "Learn more about our mission and values",
-  description: "We are a leading provider of technical SEO solutions and web development services."
-};
+const { hero } = pageContent!.data;
 ---
 
 <BaseLayout metadata={metadata} schemaData={schemaData}>
