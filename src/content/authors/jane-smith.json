@@ -2,7 +2,7 @@
   "name": "Jane Smith",
   "role": "Technical Writer",
   "bio": "Sample bio text.",
-  "image": "/placeholder-avatar.jpg",
+  "image": "/placeholder-avatar.svg",
   "social": {
     "linkedin": "https://linkedin.com/in/janesmith"
   },

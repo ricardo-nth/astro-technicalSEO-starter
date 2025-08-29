@@ -1,0 +1,447 @@
+---
+// Import layout
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+// Import components
+import EnhancedSchema from '../components/seo/EnhancedSchema.astro';
+
+// Import content utilities
+import { getAllTeamMembers, getPageSEO } from '../utils/content.ts';
+
+// Get team data
+const allTeamMembers = await getAllTeamMembers();
+const teamSEO = await getPageSEO('team');
+
+// Helper function to format social links
+function formatSocialIcon(platform: string): string {
+  const icons: Record<string, string> = {
+    'linkedin': 'fab fa-linkedin',
+    'twitter': 'fab fa-twitter',
+    'github': 'fab fa-github',
+    'email': 'fas fa-envelope',
+    'website': 'fas fa-globe'
+  };
+  return icons[platform.toLowerCase()] || 'fas fa-link';
+}
+
+// Group team members by department (filter out undefined departments)
+const departments = [...new Set(allTeamMembers
+  .map(member => member.data.department)
+  .filter((dept): dept is string => dept !== undefined)
+)];
+
+// Sort team members by seniority/role hierarchy
+function getSortOrder(role: string) {
+  const hierarchy = {
+    'CEO': 1,
+    'CTO': 2,
+    'VP': 3,
+    'Director': 4,
+    'Senior Manager': 5,
+    'Manager': 6,
+    'Senior Developer': 7,
+    'Developer': 8,
+    'Specialist': 9,
+    'Consultant': 10,
+    'Analyst': 11,
+    'Coordinator': 12
+  };
+  
+  for (const [title, order] of Object.entries(hierarchy)) {
+    if (role.includes(title)) return order;
+  }
+  return 999; // Default for unmatched roles
+}
+
+const sortedTeamMembers = allTeamMembers.sort((a, b) => {
+  const deptA = a.data.department || '';
+  const deptB = b.data.department || '';
+  const deptCompare = deptA.localeCompare(deptB);
+  if (deptCompare !== 0) return deptCompare;
+  
+  const roleA = getSortOrder(a.data.role);
+  const roleB = getSortOrder(b.data.role);
+  return roleA - roleB;
+});
+
+// Page metadata
+const metadata = {
+  title: teamSEO?.title || 'Our Team - Meet the Experts Behind Our Success',
+  description: teamSEO?.description || 'Meet our talented team of technical SEO experts, web developers, and digital strategists committed to delivering exceptional results and driving your online success.',
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  keywords: teamSEO?.keywords?.join(', ') || 'team, experts, technical SEO specialists, web developers, digital strategists, professional team',
+  ogType: 'website',
+  siteName: 'Technical SEO Starter',
+  twitterCard: 'summary_large_image',
+};
+---
+
+<SiteLayout metadata={metadata}>
+  <EnhancedSchema
+    type="webpage"
+    title={teamSEO?.title || "Our Team - Meet the Experts Behind Our Success"}
+    description={teamSEO?.description || "Meet our talented team of technical SEO experts and web developers."}
+    url={new URL(Astro.url.pathname, Astro.site).toString()}
+    breadcrumbs={teamSEO?.schema?.breadcrumbs || [
+      { name: 'Home', url: '/' },
+      { name: 'Team' }
+    ]}
+  />
+  
+  <!-- Team Hero Section -->
+  <section class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.3) 1px, transparent 0); background-size: 30px 30px;"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-6">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Meet Our Amazing Team
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          The <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Experts</span> Behind Your Success
+        </h1>
+        
+        <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+          Our diverse team of technical SEO specialists, developers, and strategists brings together decades of experience 
+          to deliver exceptional results for your business.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+          <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg">
+            <div class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mb-4 mx-auto">
+              <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div class="text-2xl font-bold text-gray-900 mb-1">{allTeamMembers.length}</div>
+            <div class="text-sm text-gray-600">Team Members</div>
+          </div>
+          
+          <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg">
+            <div class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-xl mb-4 mx-auto">
+              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+              </svg>
+            </div>
+            <div class="text-2xl font-bold text-gray-900 mb-1">{departments.length}</div>
+            <div class="text-sm text-gray-600">Departments</div>
+          </div>
+          
+          <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg">
+            <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-xl mb-4 mx-auto">
+              <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            </div>
+            <div class="text-2xl font-bold text-gray-900 mb-1">Expert</div>
+            <div class="text-sm text-gray-600">Level</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Department Filter -->
+  <section class="py-8 bg-white border-b border-gray-200">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Filter by Department</h2>
+        <p class="text-gray-600">Explore our talented team across different departments</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+        <button 
+          class="filter-btn px-6 py-3 rounded-full border-2 border-blue-500 bg-blue-500 text-white font-semibold transition-all duration-200 hover:bg-blue-600 hover:border-blue-600 hover:shadow-lg transform hover:scale-105 active"
+          data-department="all"
+        >
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+            </svg>
+            All Team ({allTeamMembers.length})
+          </span>
+        </button>
+        {departments.map(department => {
+          const count = allTeamMembers.filter(member => member.data.department === department).length;
+          const icon = department === 'Leadership' ? 'M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z' : 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z';
+          return (
+            <button 
+              class="filter-btn px-6 py-3 rounded-full border-2 border-gray-200 text-gray-700 font-semibold transition-all duration-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transform hover:scale-105 bg-white"
+              data-department={department}
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d={icon}/>
+                </svg>
+                {department} ({count})
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        {sortedTeamMembers.map(member => (
+          <div 
+            class="team-card bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-gray-100"
+            data-department={member.data.department}
+          >
+            <!-- Member Card Header -->
+            <div class="p-6 text-center">
+              <!-- Small Profile Image -->
+              <div class="relative mx-auto mb-4">
+                <img 
+                  src={member.data.image}
+                  alt={`${member.data.name} - ${member.data.role}`}
+                  class="w-20 h-20 rounded-full object-cover mx-auto border-4 border-gray-100 shadow-md"
+                  loading="lazy"
+                />
+                {member.data.featured && (
+                  <div class="absolute -top-1 -right-1">
+                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+                      ★
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <!-- Member Info -->
+              <div class="mb-4">
+                <h3 class="text-lg font-bold text-gray-900 mb-1">
+                  {member.data.name}
+                </h3>
+                <p class="text-blue-600 font-medium text-sm mb-2">
+                  {member.data.role}
+                </p>
+                
+                <!-- Department and Experience Badges -->
+                <div class="flex flex-wrap justify-center gap-2 mb-3">
+                  {member.data.department && (
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      {member.data.department}
+                    </span>
+                  )}
+                  {member.data.experience && (
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                      {member.data.experience}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <!-- Bio -->
+              <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                {member.data.bio}
+              </p>
+
+              <!-- Skills -->
+              {member.data.skills && member.data.skills.length > 0 && (
+                <div class="mb-4">
+                  <h4 class="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">Skills</h4>
+                  <div class="flex flex-wrap justify-center gap-1">
+                    {member.data.skills.slice(0, 3).map((skill: string) => (
+                      <span class="inline-block px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-700">
+                        {skill}
+                      </span>
+                    ))}
+                    {member.data.skills.length > 3 && (
+                      <span class="inline-block px-2 py-1 rounded text-xs text-gray-500 border border-dashed border-gray-300">
+                        +{member.data.skills.length - 3}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <!-- Social Links -->
+              {member.data.social && Object.keys(member.data.social).length > 0 && (
+                <div class="flex justify-center gap-3 pt-4 border-t border-gray-100">
+                  {Object.entries(member.data.social).map(([platform, url]) => (
+                    <a 
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-gray-400 hover:text-blue-500 transition-colors duration-200 transform hover:scale-110"
+                      aria-label={`${member.data.name} on ${platform}`}
+                    >
+                      <i class={`${formatSocialIcon(platform)} text-base`}></i>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden text-center py-20">
+        <div class="max-w-md mx-auto">
+          <div class="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">No team members found</h3>
+          <p class="text-gray-500">Try selecting a different department to see our amazing team members.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Our Team CTA -->
+  <section class="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-400/30">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+          </svg>
+          Join Our Team
+        </div>
+        
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          Ready to Make an <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Impact</span>?
+        </h2>
+        
+        <p class="text-xl text-gray-300 mb-10 leading-relaxed max-w-3xl mx-auto">
+          We're always looking for talented individuals who share our passion for technical excellence and innovation. 
+          Join us in building the future of SEO and web performance.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto">
+          <a 
+            href="/contact" 
+            class="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5 group-hover:rotate-12 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+            </svg>
+            Get In Touch
+          </a>
+          
+          <a 
+            href="/about" 
+            class="group border-2 border-white/30 hover:border-white/50 text-white hover:bg-white/10 font-semibold py-4 px-8 rounded-xl transition-all duration-200 backdrop-blur-sm flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+            </svg>
+            Learn More About Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
+
+<!-- Font Awesome for Social Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .team-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .filter-btn.active {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    border-color: #3b82f6;
+    color: white;
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+  }
+  
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .team-card {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  .team-card:nth-child(1) { animation-delay: 0.1s; }
+  .team-card:nth-child(2) { animation-delay: 0.2s; }
+  .team-card:nth-child(3) { animation-delay: 0.3s; }
+  .team-card:nth-child(4) { animation-delay: 0.4s; }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const teamCards = document.querySelectorAll('.team-card');
+    const emptyState = document.getElementById('empty-state');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function(this: HTMLElement) {
+        const department = this.getAttribute('data-department');
+        
+        // Update active button
+        filterButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.classList.remove('bg-blue-500', 'text-white', 'border-blue-500');
+          btn.classList.add('border-gray-200', 'text-gray-700', 'bg-white');
+        });
+        this.classList.add('active');
+        this.classList.add('bg-blue-500', 'text-white', 'border-blue-500');
+        this.classList.remove('border-gray-200', 'text-gray-700', 'bg-white');
+        
+        // Filter team cards
+        let visibleCards = 0;
+        teamCards.forEach(card => {
+          if (department === 'all' || card.getAttribute('data-department') === department) {
+            card.classList.remove('hidden');
+            visibleCards++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        // Show/hide empty state
+        if (visibleCards === 0) {
+          emptyState?.classList.remove('hidden');
+        } else {
+          emptyState?.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

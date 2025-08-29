@@ -40,6 +40,27 @@ export async function getNavigation() {
   return navigation?.data;
 }
 
+// SEO content getters
+export async function getGlobalSEO() {
+  const seo = await getEntry('seo', 'global');
+  return seo?.data;
+}
+
+export async function getPageSEO(page: string) {
+  try {
+    const seo = await getEntry('seo', page);
+    return seo?.data;
+  } catch {
+    // Return null if SEO config doesn't exist for this page
+    return null;
+  }
+}
+
+export async function getBlogSEO() {
+  const seo = await getEntry('seo', 'blog');
+  return seo?.data;
+}
+
 // New content collection getters
 export async function getAllAuthors() {
   return await getCollection('authors');
