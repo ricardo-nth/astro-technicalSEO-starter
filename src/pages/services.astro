@@ -3,6 +3,8 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 
 // Import components
+import StandardHero from '../components/ui/StandardHero.astro';
+import StandardCTA from '../components/ui/StandardCTA.astro';
 import EnhancedSchema from '../components/seo/EnhancedSchema.astro';
 
 // Import content utilities
@@ -42,13 +44,38 @@ const metadata = {
     services={servicesData?.services}
   />
   
+  <StandardHero 
+    badge={{
+      icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+      text: "Professional Services"
+    }}
+    title="Comprehensive Technical SEO Solutions"
+    highlightText="Technical SEO"
+    description="Elevate your digital presence with our expert technical SEO services. From comprehensive audits to performance optimization, we deliver measurable results that drive growth."
+    stats={[
+      {
+        icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+        number: "100%",
+        label: "Success Rate",
+        color: "blue"
+      },
+      {
+        icon: "M13 10V3L4 14h7v7l9-11h-7z",
+        number: "150%",
+        label: "Avg. Traffic Increase",
+        color: "green"
+      },
+      {
+        icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+        number: "48hrs",
+        label: "Response Time",
+        color: "purple"
+      }
+    ]}
+  />
+
   <main class="services-page">
     <div class="container">
-      <!-- Page Header -->
-      <section class="services-header">
-        <h1>Our Services</h1>
-        <p>Comprehensive technical SEO solutions designed to elevate your digital presence and drive measurable results.</p>
-      </section>
 
       <!-- Services Grid -->
       {servicesData && servicesData.services && (
@@ -113,20 +140,32 @@ const metadata = {
           })}
         </section>
       )}
-
-      <!-- Call to Action Section -->
-      <section class="services-cta">
-        <div class="cta-content">
-          <h2>Ready to Boost Your SEO Performance?</h2>
-          <p>Let our technical SEO experts help you achieve better search rankings and improved website performance.</p>
-          <div class="cta-buttons">
-            <a href="/contact" class="btn-primary">Start Your Project</a>
-            <a href="/case-studies" class="btn-secondary">View Case Studies</a>
-          </div>
-        </div>
-      </section>
     </div>
   </main>
+  
+  <StandardCTA 
+    badge={{
+      icon: "M13 10V3L4 14h7v7l9-11h-7z",
+      text: "Ready to Start?"
+    }}
+    title="Ready to Boost Your SEO Performance?"
+    highlightText="Boost"
+    description="Let our technical SEO experts help you achieve better search rankings and improved website performance. Join our success stories today."
+    buttons={[
+      {
+        text: "Start Your Project",
+        href: "/contact",
+        type: "primary",
+        icon: "M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+      },
+      {
+        text: "View Case Studies",
+        href: "/case-studies",
+        type: "secondary",
+        icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+      }
+    ]}
+  />
 </SiteLayout>
 
 <style>
