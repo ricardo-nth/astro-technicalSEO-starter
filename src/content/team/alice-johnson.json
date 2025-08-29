@@ -1,0 +1,14 @@
+{
+  "name": "Alice Johnson",
+  "role": "CEO",
+  "department": "Leadership",
+  "bio": "Sample leadership bio.",
+  "image": "/placeholder-avatar.jpg",
+  "email": "alice@company.com",
+  "social": {
+    "linkedin": "https://linkedin.com/in/alicejohnson"
+  },
+  "expertise": ["Strategy", "Business Development"],
+  "orderIndex": 1,
+  "featured": true
+}

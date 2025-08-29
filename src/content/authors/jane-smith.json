@@ -1,0 +1,10 @@
+{
+  "name": "Jane Smith",
+  "role": "Technical Writer",
+  "bio": "Sample bio text.",
+  "image": "/placeholder-avatar.jpg",
+  "social": {
+    "linkedin": "https://linkedin.com/in/janesmith"
+  },
+  "expertise": ["Web Development", "Performance"]
+}

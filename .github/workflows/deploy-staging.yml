@@ -1,0 +1,67 @@
+name: Deploy Staging
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ develop, staging ]
+
+jobs:
+  deploy:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    environment: staging
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Build for staging
+        run: pnpm run build
+        env:
+          NODE_ENV: staging
+          SITE_URL: ${{ vars.STAGING_SITE_URL }}
+          GTM_ID: ${{ vars.STAGING_GTM_ID }}
+          
+      - name: Deploy to Netlify staging
+        if: vars.NETLIFY_STAGING_SITE_ID
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=dist
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_STAGING_SITE_ID }}
+          
+      - name: Deploy to Vercel preview
+        if: vars.VERCEL_PROJECT_ID
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ vars.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ vars.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          
+      - name: Comment deployment URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🚀 Staging deployment ready!\n\nPreview: ${{ vars.STAGING_SITE_URL }}'
+            })

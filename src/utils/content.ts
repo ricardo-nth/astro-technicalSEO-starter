@@ -1,4 +1,4 @@
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 
 /**
  * Utility functions to access global content collections
@@ -38,6 +38,81 @@ export async function getTestimonials() {
 export async function getNavigation() {
   const navigation = await getEntry('navigation', 'navigation');
   return navigation?.data;
+}
+
+// New content collection getters
+export async function getAllAuthors() {
+  return await getCollection('authors');
+}
+
+export async function getAuthor(id: string) {
+  const author = await getEntry('authors', id);
+  return author?.data;
+}
+
+export async function getAllTeamMembers() {
+  return await getCollection('team');
+}
+
+export async function getFeaturedTeamMembers() {
+  const team = await getCollection('team');
+  return team.filter(member => member.data.featured);
+}
+
+export async function getTeamMembersByDepartment(department: string) {
+  const team = await getCollection('team');
+  return team.filter(member => member.data.department === department);
+}
+
+export async function getAllCaseStudies() {
+  return await getCollection('case-studies');
+}
+
+export async function getFeaturedCaseStudies() {
+  const caseStudies = await getCollection('case-studies');
+  return caseStudies.filter(study => study.data.featured);
+}
+
+export async function getCaseStudiesByService(serviceId: string) {
+  const caseStudies = await getCollection('case-studies');
+  return caseStudies.filter(study => study.data.services.includes(serviceId));
+}
+
+export async function getAllBlogPosts() {
+  return await getCollection('blog', ({ data }) => data.published);
+}
+
+export async function getFeaturedBlogPosts() {
+  const posts = await getCollection('blog', ({ data }) => data.published && data.featured);
+  return posts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+}
+
+export async function getBlogPostsByCategory(category: string) {
+  const posts = await getCollection('blog', ({ data }) => data.published && data.category === category);
+  return posts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+}
+
+export async function getBlogPostsByTag(tag: string) {
+  const posts = await getCollection('blog', ({ data }) => data.published && data.tags.includes(tag));
+  return posts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+}
+
+export async function getAllLegalPages() {
+  return await getCollection('legal');
+}
+
+export async function getAllPressItems() {
+  return await getCollection('press');
+}
+
+export async function getFeaturedPressItems() {
+  const press = await getCollection('press');
+  return press.filter(item => item.data.featured).sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+}
+
+export async function getPressByType(type: string) {
+  const press = await getCollection('press');
+  return press.filter(item => item.data.type === type).sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 }
 
 // Helper functions for filtered data

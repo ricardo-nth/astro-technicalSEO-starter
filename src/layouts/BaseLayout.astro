@@ -10,6 +10,9 @@ import Schema from '@/components/seo/Schema.astro';
 import Favicons from '@/components/seo/Favicons.astro';
 import '@/assets/styles/global.css';
 
+// Import monitoring
+import { initSentry } from '@/utils/security/monitoring';
+
 // Import components
 //import Nav from '@/components/common/Nav.astro';
 
@@ -23,6 +26,9 @@ export interface Props {
 }
 
 const { metadata = {}, schemaData = [] } = Astro.props;
+
+// Initialize Sentry for error monitoring
+initSentry();
 ---
 <!doctype html>
 <html lang="en">
