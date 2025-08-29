@@ -56,6 +56,9 @@ coverage/
 *.temp
 .temporary/
 
+# Playwright MCP screenshots (temporary)
+.playwright-mcp/
+
 # Runtime data
 pids
 *.pid
