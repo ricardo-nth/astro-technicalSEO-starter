@@ -26,7 +26,7 @@ pnpm-debug.log*
 .DS_Store
 
 # Astro build artifacts
-.astro/
+.astro
 
 # IDE configuration
 .idea/
