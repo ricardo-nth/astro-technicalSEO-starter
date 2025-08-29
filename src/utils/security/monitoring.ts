@@ -46,7 +46,7 @@ export function getSentryConfig(): SentryConfig | null {
 export function initSentry() {
   const config = getSentryConfig();
   if (!config) {
-    console.log('Sentry configuration not found - error monitoring disabled');
+    // Sentry not configured - monitoring disabled (this is normal for development)
     return;
   }
 
