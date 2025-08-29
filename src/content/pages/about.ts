@@ -1,0 +1,6 @@
+// About page content data
+export const hero = {
+  heading: "About Our Company",
+  subheading: "Learn more about our mission and values",
+  description: "We are a leading provider of technical SEO solutions and web development services."
+};

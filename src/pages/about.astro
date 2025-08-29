@@ -1,13 +1,28 @@
 ---
 // Import layout
 import BaseLayout from '@/layouts/BaseLayout.astro';
-// Import data
-import { aboutMeta, aboutSchema } from '@/data/about/seo'
-import {hero} from '@/data/about/content'
+
+// Import SEO utility
+import { mergeSeoData } from '@/utils/seo';
+
+// Import page content from Content Collections
+import { getEntry } from 'astro:content';
+
 // Import components
 import Welcome from '@/components/Welcome.astro';
+
+// Get merged SEO data
+const { metadata, schemaData } = await mergeSeoData('about');
+
+// Get page content (with fallback)
+const pageContent = await getEntry('pages', 'about');
+const hero = pageContent?.data?.hero || {
+  heading: "About Our Company",
+  subheading: "Learn more about our mission and values",
+  description: "We are a leading provider of technical SEO solutions and web development services."
+};
 ---
 
-<BaseLayout metadata={aboutMeta} schemaData={aboutSchema}>
+<BaseLayout metadata={metadata} schemaData={schemaData}>
   <Welcome />
 </BaseLayout>

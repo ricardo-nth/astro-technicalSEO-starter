@@ -1,9 +1,12 @@
 ---
-import verification from '@/data/global/verification'
+import verification from '@/content/verification'
 
 const { google, bing, pinterest } = verification
+
+// Only render meta tags if verification codes are provided
+// For DNS verification, leave these empty and use TXT records instead
 ---
 
-{google && <meta name="google-site-verification" content={google} />}
-{bing && <meta name="msvalidate.01" content={bing} />}
-{pinterest && <meta name="p:domain_verify" content={pinterest} />}
+{google && google.trim() && <meta name="google-site-verification" content={google} />}
+{bing && bing.trim() && <meta name="msvalidate.01" content={bing} />}
+{pinterest && pinterest.trim() && <meta name="p:domain_verify" content={pinterest} />}

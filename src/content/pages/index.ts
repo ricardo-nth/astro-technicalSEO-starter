@@ -1,0 +1,6 @@
+// Homepage content data
+export const hero = {
+  heading: "Welcome to Our Homepage",
+  subheading: "Technical SEO boilerplate built with Astro",
+  description: "This is a modular, SEO-first Astro boilerplate designed for agencies and developers."
+};

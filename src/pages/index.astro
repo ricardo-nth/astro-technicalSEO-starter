@@ -2,17 +2,30 @@
 // Import layout
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-// Import data
-import { homeMeta, homeSchema } from '@/data/index/seo'
-import {hero} from '@/data/index/content'
+// Import SEO utility
+import { mergeSeoData } from '@/utils/seo';
+
+// Import page content from Content Collections
+import { getEntry } from 'astro:content';
 
 // Import components
 import Hero from '@/components/Hero.astro';
 import Steps from '@/components/Steps.astro';
 import ChooseUs from '@/components/ChooseUs.astro';
+
+// Get merged SEO data
+const { metadata, schemaData } = await mergeSeoData('index');
+
+// Get page content (with fallback)
+const pageContent = await getEntry('pages', 'index');
+const hero = pageContent?.data?.hero || {
+  heading: "Welcome to Our Homepage",
+  subheading: "Technical SEO boilerplate built with Astro",
+  description: "This is a modular, SEO-first Astro boilerplate designed for agencies and developers."
+};
 ---
 
-<BaseLayout metadata={homeMeta} schemaData={homeSchema}>
+<BaseLayout metadata={metadata} schemaData={schemaData}>
   <Hero />
   <Steps />
   <ChooseUs />

@@ -1,14 +1,29 @@
 ---
 // Import layout
 import BaseLayout from '@/layouts/BaseLayout.astro';
-// Import data
-import { contactMeta, contactSchema } from '@/data/contact/seo'
-import { hero } from '@/data/contact/content'
+
+// Import SEO utility
+import { mergeSeoData } from '@/utils/seo';
+
+// Import page content from Content Collections
+import { getEntry } from 'astro:content';
+
 // Import components
 import Welcome from '@/components/Welcome.astro';
+
+// Get merged SEO data
+const { metadata, schemaData } = await mergeSeoData('contact');
+
+// Get page content (with fallback)
+const pageContent = await getEntry('pages', 'contact');
+const hero = pageContent?.data?.hero || {
+  heading: "Get In Touch",
+  subheading: "Contact us for more information",
+  description: "Ready to start your next project? We'd love to hear from you."
+};
 ---
 
-<BaseLayout metadata={contactMeta} schemaData={contactSchema}>
+<BaseLayout metadata={metadata} schemaData={schemaData}>
   <h1>{hero.heading}</h1>
   <Welcome />
 </BaseLayout>
