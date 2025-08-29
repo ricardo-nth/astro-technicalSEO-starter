@@ -4,14 +4,21 @@ import SiteLayout from '@/layouts/SiteLayout.astro';
 
 // Import components
 import Welcome from '@/components/sections/Welcome.astro';
+import CompanyOverview from '@/components/sections/CompanyOverview.astro';
+import TeamOverview from '@/components/sections/TeamOverview.astro';
 import EnhancedSchema from '@/components/seo/EnhancedSchema.astro';
 
 // Import page content from Content Collections
 import { getEntry } from 'astro:content';
+import { getCompanyInfo, getFeaturedTeamMembers } from '@/utils/content.ts';
 
 // Get page content and SEO data
 const pageContent = await getEntry('pages', 'about');
 const seoData = await getEntry('seo', 'about');
+
+// Get business data for about page
+const companyInfo = await getCompanyInfo();
+const teamMembers = await getFeaturedTeamMembers();
 
 // Extract data
 const { hero } = pageContent?.data || {};
@@ -48,5 +55,6 @@ const metadata = {
     breadcrumbs={schema?.breadcrumbs}
   />
   
-  <Welcome />
+  <CompanyOverview company={companyInfo} />
+  <TeamOverview teamMembers={teamMembers} />
 </SiteLayout>

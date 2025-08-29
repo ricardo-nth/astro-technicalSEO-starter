@@ -6,14 +6,21 @@ import SiteLayout from '@/layouts/SiteLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
 import Steps from '@/components/sections/Steps.astro';
 import ChooseUs from '@/components/sections/ChooseUs.astro';
+import ServicesOverview from '@/components/sections/ServicesOverview.astro';
+import TestimonialsOverview from '@/components/sections/TestimonialsOverview.astro';
 import EnhancedSchema from '@/components/seo/EnhancedSchema.astro';
 
 // Import page content from Content Collections
 import { getEntry } from 'astro:content';
+import { getServices, getFeaturedTestimonials } from '@/utils/content.ts';
 
 // Get page content and SEO data
 const pageContent = await getEntry('pages', 'index');
 const seoData = await getEntry('seo', 'index');
+
+// Get business data for homepage
+const servicesData = await getServices();
+const testimonials = await getFeaturedTestimonials();
 
 // Extract data
 const { hero } = pageContent?.data || {};
@@ -60,6 +67,8 @@ const metadata = {
   />
   
   <Hero />
+  <ServicesOverview services={servicesData} />
   <Steps />
+  <TestimonialsOverview testimonials={testimonials} />
   <ChooseUs />
 </SiteLayout>
