@@ -1,11 +1,11 @@
 ---
 // Import layout
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteLayout from '@/layouts/SiteLayout.astro';
 
 // Import components
-import Hero from '@/components/Hero.astro';
-import Steps from '@/components/Steps.astro';
-import ChooseUs from '@/components/ChooseUs.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Steps from '@/components/sections/Steps.astro';
+import ChooseUs from '@/components/sections/ChooseUs.astro';
 import EnhancedSchema from '@/components/seo/EnhancedSchema.astro';
 
 // Import page content from Content Collections
@@ -44,7 +44,7 @@ const metadata = {
 };
 ---
 
-<BaseLayout metadata={metadata}>
+<SiteLayout metadata={metadata}>
   <EnhancedSchema
     type={schema?.type || 'webpage'}
     title={title || 'Technical SEO Starter'}
@@ -62,4 +62,4 @@ const metadata = {
   <Hero />
   <Steps />
   <ChooseUs />
-</BaseLayout>
+</SiteLayout>

@@ -35,6 +35,11 @@ export async function getTestimonials() {
   return testimonials?.data;
 }
 
+export async function getNavigation() {
+  const navigation = await getEntry('navigation', 'navigation');
+  return navigation?.data;
+}
+
 // Helper functions for filtered data
 export async function getFeaturedTestimonials() {
   const testimonials = await getTestimonials();

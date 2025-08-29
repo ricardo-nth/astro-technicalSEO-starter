@@ -213,6 +213,32 @@ const globalCollection = defineCollection({
   }),
 });
 
+// Define navigation collection
+const navigationCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    brand: z.object({
+      name: z.string(),
+      logo: z.string().optional(),
+    }),
+    primaryLinks: z.array(z.object({
+      label: z.string(),
+      url: z.string(),
+      isActive: z.boolean().default(false),
+    })),
+    secondaryLinks: z.array(z.object({
+      label: z.string(),
+      url: z.string(),
+      isActive: z.boolean().default(false),
+    })).optional(),
+    cta: z.object({
+      label: z.string(),
+      url: z.string(),
+      type: z.enum(['primary', 'secondary']).default('primary'),
+    }).optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   seo: seoCollection,
@@ -224,4 +250,5 @@ export const collections = {
   pricing: pricingCollection,
   testimonials: testimonialsCollection,
   global: globalCollection,
+  navigation: navigationCollection,
 };
