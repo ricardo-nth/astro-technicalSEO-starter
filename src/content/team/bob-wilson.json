@@ -1,12 +1,16 @@
 {
   "name": "Bob Wilson",
-  "role": "CTO",
+  "role": "Chief Technology Officer",
   "department": "Technology",
-  "bio": "Sample technical bio.",
-  "image": "/placeholder-avatar.jpg",
+  "bio": "Bob is a seasoned software architect with deep expertise in modern web technologies, performance optimization, and scalable system design. He leads our technical team in delivering cutting-edge SEO solutions.",
+  "image": "/placeholder-avatar.svg",
+  "email": "bob@company.com",
+  "experience": "12+ years",
+  "skills": ["Web Development", "System Architecture", "Performance Optimization", "JavaScript", "Python", "Cloud Technologies"],
   "social": {
     "linkedin": "https://linkedin.com/in/bobwilson",
-    "github": "https://github.com/bobwilson"
+    "github": "https://github.com/bobwilson",
+    "twitter": "https://twitter.com/bobwilson"
   },
   "expertise": ["Web Development", "Architecture"],
   "orderIndex": 2,

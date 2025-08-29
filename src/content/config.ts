@@ -270,6 +270,8 @@ const teamCollection = defineCollection({
     bio: z.string(),
     image: z.string(),
     email: z.string().email().optional(),
+    experience: z.string().optional(),
+    skills: z.array(z.string()).optional(),
     social: z.object({
       linkedin: z.string().optional(),
       twitter: z.string().optional(),

@@ -1,12 +1,15 @@
 {
   "name": "Alice Johnson",
-  "role": "CEO",
+  "role": "Chief Executive Officer",
   "department": "Leadership",
-  "bio": "Sample leadership bio.",
-  "image": "/placeholder-avatar.jpg",
+  "bio": "Alice brings over 15 years of experience in digital marketing and business strategy. She founded TechSEO Solutions with a vision to help businesses succeed through technical excellence and innovative SEO strategies.",
+  "image": "/placeholder-avatar.svg",
   "email": "alice@company.com",
+  "experience": "15+ years",
+  "skills": ["Strategic Planning", "Business Development", "Team Leadership", "Digital Marketing", "SEO Strategy"],
   "social": {
-    "linkedin": "https://linkedin.com/in/alicejohnson"
+    "linkedin": "https://linkedin.com/in/alicejohnson",
+    "twitter": "https://twitter.com/alicejohnson"
   },
   "expertise": ["Strategy", "Business Development"],
   "orderIndex": 1,

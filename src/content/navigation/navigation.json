@@ -15,6 +15,21 @@
       "isActive": false
     },
     {
+      "label": "Services",
+      "url": "/services",
+      "isActive": false
+    },
+    {
+      "label": "Team",
+      "url": "/team",
+      "isActive": false
+    },
+    {
+      "label": "Blog",
+      "url": "/blog",
+      "isActive": false
+    },
+    {
       "label": "Contact",
       "url": "/contact",
       "isActive": false

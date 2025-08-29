@@ -5,7 +5,7 @@ author: "john-doe"
 publishDate: 2024-08-20
 category: "SEO"
 tags: ["SEO", "Technical", "Beginner"]
-featuredImage: "/placeholder-blog.jpg"
+featuredImage: "/placeholder-blog.svg"
 readTime: 5
 featured: true
 published: true
