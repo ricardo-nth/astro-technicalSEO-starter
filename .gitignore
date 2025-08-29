@@ -2,6 +2,7 @@
 dist/
 .output/
 .vercel/
+.netlify/
 
 # dependencies
 node_modules/
@@ -13,6 +14,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
 # environment variables
 .env*
@@ -21,11 +23,53 @@ pnpm-debug.log*
 
 # OS-specific files
 .DS_Store
+.DS_Store?
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
 # Astro build artifacts
 .astro/
 astro.config.mjs.timestamp-*
 
+# Cache directories
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/
+
+# Coverage reports
+coverage/
+*.lcov
+.nyc_output/
+
 # IDE configuration
 .idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+.temporary/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
