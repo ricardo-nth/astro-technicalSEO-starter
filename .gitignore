@@ -29,5 +29,4 @@ pnpm-debug.log*
 .astro/
 
 # IDE configuration
-.vscode/
 .idea/
