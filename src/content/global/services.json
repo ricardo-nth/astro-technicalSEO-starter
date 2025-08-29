@@ -1,0 +1,96 @@
+{
+  "services": [
+    {
+      "id": "technical-seo-audit",
+      "name": "Technical SEO Audit",
+      "description": "Comprehensive analysis of your website's technical foundation to identify and prioritize optimization opportunities.",
+      "features": [
+        "Complete site crawl and analysis",
+        "Core Web Vitals assessment",
+        "Mobile-first indexing review",
+        "Schema markup audit",
+        "Site architecture evaluation",
+        "Actionable recommendations report"
+      ],
+      "icon": "🔍",
+      "category": "SEO",
+      "popular": true
+    },
+    {
+      "id": "performance-optimization",
+      "name": "Performance Optimization",
+      "description": "Speed up your website with advanced performance optimization techniques and modern web technologies.",
+      "features": [
+        "Core Web Vitals optimization",
+        "Image optimization and lazy loading",
+        "Code splitting and bundling",
+        "CDN setup and configuration",
+        "Caching strategy implementation",
+        "Performance monitoring setup"
+      ],
+      "icon": "⚡",
+      "category": "Performance"
+    },
+    {
+      "id": "astro-development",
+      "name": "Astro Development",
+      "description": "Build lightning-fast websites with Astro's modern architecture and zero-JS approach.",
+      "features": [
+        "Custom Astro website development",
+        "Component-based architecture",
+        "SEO-optimized by default",
+        "Static site generation",
+        "Progressive enhancement",
+        "Modern development workflow"
+      ],
+      "icon": "🚀",
+      "category": "Development",
+      "popular": true
+    },
+    {
+      "id": "ongoing-seo",
+      "name": "Ongoing SEO Support",
+      "description": "Continuous monitoring and optimization to maintain and improve your search engine performance.",
+      "features": [
+        "Monthly performance reports",
+        "Continuous monitoring",
+        "Regular content optimization",
+        "Technical issue resolution",
+        "Algorithm update adaptations",
+        "Competitor analysis"
+      ],
+      "icon": "📈",
+      "category": "SEO"
+    },
+    {
+      "id": "migration-services",
+      "name": "Website Migration",
+      "description": "Seamlessly migrate your website to modern platforms while preserving SEO value and improving performance.",
+      "features": [
+        "Pre-migration SEO audit",
+        "URL mapping and redirects",
+        "Content migration strategy",
+        "Post-migration testing",
+        "Performance optimization",
+        "SEO value preservation"
+      ],
+      "icon": "🔄",
+      "category": "Migration"
+    },
+    {
+      "id": "consultation",
+      "name": "SEO Consultation",
+      "description": "Strategic guidance and expert advice to help you make informed decisions about your SEO strategy.",
+      "features": [
+        "1-on-1 expert consultation",
+        "Custom strategy development",
+        "Team training sessions",
+        "Best practices guidance",
+        "Tool recommendations",
+        "Implementation roadmap"
+      ],
+      "icon": "💡",
+      "category": "Consultation"
+    }
+  ]
+}
