@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "title": "PipeFix Experts | Plumbing Services",
+    "description": "Manchester's reliable plumbers.",
+    "url": "https://pipefix.co.uk",
+    "keywords": "plumbing, emergency plumber, Manchester, PipeFix"
+  },
+  "schema": [
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you offer emergency callouts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we offer 24/7 emergency callouts."
+          }
+        }
+      ]
+    }
+  ]
+}
