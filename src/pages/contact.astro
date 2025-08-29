@@ -2,24 +2,52 @@
 // Import layout
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-// Import SEO utility
-import { mergeSeoData } from '@/utils/seo';
+// Import components
+import Welcome from '@/components/Welcome.astro';
+import EnhancedSchema from '@/components/seo/EnhancedSchema.astro';
 
 // Import page content from Content Collections
 import { getEntry } from 'astro:content';
 
-// Import components
-import Welcome from '@/components/Welcome.astro';
-
-// Get merged SEO data
-const { metadata, schemaData } = await mergeSeoData('contact');
-
-// Get page content - Content Collections ensures this exists
+// Get page content and SEO data
 const pageContent = await getEntry('pages', 'contact');
-const { hero } = pageContent!.data;
+const seoData = await getEntry('seo', 'contact');
+
+// Extract data
+const { hero } = pageContent?.data || {};
+const {
+  title,
+  description,
+  keywords,
+  robots,
+  author,
+  schema,
+} = seoData?.data || {};
+
+// Page metadata
+const metadata = {
+  title: title || 'Contact - Technical SEO Starter',
+  description: description || 'Get in touch with our technical SEO experts',
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  robots,
+  author,
+  keywords: keywords?.join(', '),
+  ogType: 'website',
+  siteName: 'Technical SEO Starter',
+  twitterCard: 'summary_large_image',
+};
 ---
 
-<BaseLayout metadata={metadata} schemaData={schemaData}>
-  <h1>{hero.heading}</h1>
+<BaseLayout metadata={metadata}>
+  <EnhancedSchema
+    type={schema?.type || 'contact'}
+    title={title || 'Contact - Technical SEO Starter'}
+    description={description || 'Get in touch with our technical SEO experts'}
+    url={new URL(Astro.url.pathname, Astro.site).toString()}
+    author={author ? { name: author } : undefined}
+    breadcrumbs={schema?.breadcrumbs}
+  />
+  
+  <h1>{hero?.heading || 'Contact Us'}</h1>
   <Welcome />
 </BaseLayout>

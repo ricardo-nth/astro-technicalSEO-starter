@@ -1,218 +1,424 @@
-# VPS Astro Technical SEO Starter
-**The technical SEO-first Astro boilerplate for real projects, agencies, and solo devs.**
+# 🚀 Astro Technical SEO Starter
+**The most advanced technical SEO-first Astro template with enterprise-grade performance optimization.**
+
+[![Performance](https://img.shields.io/badge/Performance-A+-green)](https://pagespeed.web.dev/)
+[![SEO](https://img.shields.io/badge/SEO-100%25-brightgreen)](https://lighthouse-ci.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue)](https://www.typescriptlang.org/)
 
 ---
 
-## 🚀 Features
+## ✨ Key Features
 
-- **Content Collections SEO:** Leverages Astro's Content Collections for type-safe SEO data management
-- **Single Source of Truth:** All content (SEO, schema, page data) centralized in `/src/content/`
-- **GTM-Only Analytics:** Professional analytics setup with Google Tag Manager + PartyTown
-- **Optional Site Verification:** Supports both meta tags and DNS verification methods
-- **Data-driven Architecture:** JSON-based content structure for easy editing and version control
-- **No forced styling:** Add Tailwind, Preline, DaisyUI, or nothing—your choice
-- **Full technical SEO:** robots.txt, sitemap, favicons, site verification, humans.txt included
-- **Easy to extend:** Modular structure with TypeScript support
+### 🎯 **Advanced Technical SEO**
+- **Content Collections Integration:** Type-safe SEO data management with Astro's Content Collections
+- **Comprehensive Schema.org:** 400+ lines of utilities generating Organization, WebSite, WebPage, Article, FAQ, Service, and Product schemas
+- **Content Quality Validation:** Development-time validation with real-time feedback for SEO optimization
+- **Complete Meta Management:** Open Graph, Twitter Cards, canonical URLs, robots directives
+
+### ⚡ **Performance Optimization**
+- **Core Web Vitals Tracking:** Real-time LCP, FID, CLS, INP, TTFB monitoring with Google Analytics integration
+- **Advanced Caching:** Manual chunking, compression (gzip + brotli), resource hints
+- **Image Optimization:** Astro's native image processing with WebP/AVIF support
+- **Performance Budgets:** Automatic warnings for poor performance metrics
+
+### 🔧 **Developer Experience**
+- **TypeScript First:** Full type safety with automatic type generation
+- **Interactive Validation:** Development UI showing content quality issues in real-time
+- **Modular Architecture:** Easy to extend with clean separation of concerns
+- **Professional Analytics:** GTM + PartyTown integration for enterprise-grade tracking
+
+### 📊 **Built-in Analytics & Monitoring**
+- **Google Tag Manager Integration:** Professional analytics setup with PartyTown
+- **Web Vitals Dashboard:** Core Web Vitals tracking and budget monitoring
+- **Custom Performance Metrics:** Navigation timing, interaction tracking
+- **Optional Analytics:** Supports Google Analytics, Clarity, and custom solutions
 
 ---
 
-## 🛠️ Getting Started
+## 🛠️ Quick Start
 
-1. **Clone the repo:**
-   ```sh
-   git clone https://github.com/yourname/astro-techinicalSEO-starter.git
-   cd astro-starterSEO-starter
-   pnpm install # or yarn/npm install
+1. **Clone and Install:**
+   ```bash
+   git clone https://github.com/ricardo-nth/astro-technicalSEO-starter.git
+   cd astro-technicalSEO-starter
+   pnpm install
    ```
 
-2. **Set your domain in `astro.config.mjs`:**
+2. **Configure Your Site:**
    ```js
+   // astro.config.mjs
    site: "https://yourdomain.com"
    ```
 
-3. **Configure SEO & Content:**
-   - Edit global SEO: `/src/content/seo/global.json`
-   - Edit page SEO: `/src/content/seo/[page].json`
-   - Edit page content: `/src/content/pages/[page].json`
+3. **Set Up Content:**
+   ```bash
+   # Edit global SEO settings
+   src/content/seo/global.json
 
-4. **Setup Analytics (Optional):**
-   - Configure GTM: `/src/content/analytics.ts`
-   - Note: Google Analytics should be configured within GTM for better performance
+   # Edit page-specific SEO
+   src/content/seo/index.json
+   src/content/seo/about.json
 
-5. **Configure Site Verification (Optional):**
-   - For meta tags: Add codes to `/src/content/verification.ts`
-   - For DNS verification: Leave codes empty and add TXT records to your DNS
-
-6. **Build and run:**
-   ```sh
-   pnpm dev     # Start local development server
-   pnpm build   # Build for production
+   # Edit page content
+   src/content/pages/index.json
    ```
 
----
-
-## 📁 Content Structure
-
-```
-src/content/
-├── config.ts              # Content Collections schemas
-├── seo/                   # SEO metadata & schema
-│   ├── global.json        # Global SEO defaults
-│   ├── index.json         # Homepage SEO
-│   ├── about.json         # About page SEO
-│   └── contact.json       # Contact page SEO
-├── pages/                 # Page content data
-│   ├── index.json         # Homepage content
-│   ├── about.json         # About page content
-│   └── contact.json       # Contact page content
-├── analytics.ts           # GTM configuration
-└── verification.ts        # Site verification codes
-```
-
-## 🔧 Key Improvements
-
-### Content Collections Integration
-- **Type Safety:** Full TypeScript validation for all content
-- **Better DX:** Automatic type generation and IntelliSense
-- **Centralized:** All content in one logical location
-
-### GTM-Only Analytics
-- **Better Performance:** Single analytics script instead of multiple
-- **More Flexible:** Configure GA4, conversion tracking, and custom events in GTM
-- **Professional Setup:** Industry standard approach
-
-### Optional Site Verification
-- **DNS Preferred:** Supports DNS TXT record verification
-- **Meta Tag Fallback:** Optional meta tag verification for quick setup
-- **Cleaner HTML:** Only outputs meta tags when codes are provided
-
----
-
-## 📋 Adding New Pages
-
-1. **Create SEO data:**
-   ```json
-   // src/content/seo/new-page.json
-   {
-     "meta": {
-       "title": "Your Page Title",
-       "description": "Your page description",
-       "url": "https://yourdomain.com/new-page"
-     },
-     "schema": [/* Your schema.org data */]
-   }
-   ```
-
-2. **Create page content:**
-   ```json
-   // src/content/pages/new-page.json
-   {
-     "hero": {
-       "heading": "Page Heading",
-       "subheading": "Page subheading"
+4. **Configure Analytics (Optional):**
+   ```typescript
+   // src/content/analytics.ts
+   export const analytics = {
+     gtm: {
+       id: 'GTM-XXXXXXX', // Your GTM container ID
+       enabled: true
      }
    }
    ```
 
-3. **Create the page:**
-   ```astro
-   ---
-   // src/pages/new-page.astro
-   import BaseLayout from '@/layouts/BaseLayout.astro';
-   import { mergeSeoData } from '@/utils/seo';
-   import { getEntry } from 'astro:content';
-
-   const { metadata, schemaData } = await mergeSeoData('new-page');
-   const pageContent = await getEntry('pages', 'new-page');
-   ---
-   <BaseLayout metadata={metadata} schemaData={schemaData}>
-     <!-- Your page content -->
-   </BaseLayout>
+5. **Run Development Server:**
+   ```bash
+   pnpm dev  # Visit http://localhost:4321
    ```
 
 ---
 
-## 🎯 SEO Features Included
+## 📚 Interactive Content Management
 
-✅ **Meta Tags:** Title, description, robots, keywords, author  
-✅ **Open Graph:** Facebook, LinkedIn sharing optimization  
-✅ **Twitter Cards:** Twitter sharing optimization  
-✅ **Schema.org:** JSON-LD structured data  
-✅ **Canonical URLs:** Proper URL canonicalization  
-✅ **Favicons:** Complete favicon implementation  
-✅ **Robots.txt:** Auto-generated robots.txt  
-✅ **Sitemap:** Auto-generated XML sitemap  
-✅ **Site Verification:** Google, Bing, Pinterest support  
-✅ **Humans.txt:** Developer credits  
+### 🎨 **Content Collections Structure**
+All content is managed through Astro's Content Collections for full type safety:
+
+```
+src/content/
+├── config.ts              # Content schemas & validation
+├── seo/                   # SEO metadata for each page
+│   ├── global.json        # Global SEO settings & defaults
+│   ├── index.json         # Homepage SEO configuration
+│   ├── about.json         # About page SEO
+│   └── contact.json       # Contact page SEO
+├── pages/                 # Page-specific content data  
+│   ├── index.json         # Homepage content
+│   ├── about.json         # About page content
+│   └── contact.json       # Contact page content
+├── analytics.ts           # Analytics configuration
+└── verification.ts        # Site verification codes
+```
+
+### ✏️ **Editing Content**
+
+#### **Global SEO Settings** (`src/content/seo/global.json`):
+```json
+{
+  "site": {
+    "name": "Your Company Name",
+    "description": "Your company description",
+    "url": "https://yourdomain.com",
+    "logo": "/logo.png",
+    "image": "/og-image.jpg"
+  },
+  "social": {
+    "twitter": "@yourhandle",
+    "facebook": "yourcompany",
+    "linkedin": "company/yourcompany"
+  },
+  "contact": {
+    "email": "hello@yourdomain.com",
+    "phone": "+1-555-0123",
+    "address": {
+      "street": "123 Main St",
+      "city": "Your City",
+      "state": "CA",
+      "zip": "12345",
+      "country": "US"
+    }
+  }
+}
+```
+
+#### **Page SEO Configuration** (`src/content/seo/index.json`):
+```json
+{
+  "meta": {
+    "title": "Your Page Title | Company Name",
+    "description": "Compelling page description for search results",
+    "keywords": ["keyword1", "keyword2", "keyword3"],
+    "robots": "index, follow",
+    "canonical": "https://yourdomain.com/",
+    "openGraph": {
+      "type": "website",
+      "image": "/og-homepage.jpg",
+      "imageAlt": "Homepage preview image"
+    }
+  },
+  "schema": {
+    "type": "WebPage",
+    "breadcrumbs": [],
+    "organization": true,
+    "website": true
+  }
+}
+```
+
+#### **Page Content** (`src/content/pages/index.json`):
+```json
+{
+  "hero": {
+    "heading": "Welcome to Our Company",
+    "subheading": "We deliver exceptional results",
+    "ctaText": "Get Started",
+    "ctaUrl": "/contact"
+  },
+  "features": [
+    {
+      "title": "Feature Name",
+      "description": "Feature description",
+      "icon": "icon-name"
+    }
+  ]
+}
+```
+
+### 🔧 **Development Validation**
+
+The template includes a **real-time validation system** that appears during development:
+
+- ✅ **SEO Validation**: Title length, meta description, keywords count
+- ✅ **Content Quality**: Word count, readability, heading structure  
+- ✅ **Schema Validation**: Required fields, type-specific validation
+- ✅ **Performance**: Image optimization, loading attributes
+
+**View validation in development:**
+```bash
+pnpm dev
+# Visit any page - validation report appears at bottom
+```
 
 ---
 
-## 🔧 Analytics Setup
+## 🏗️ Adding New Pages
 
-### Google Tag Manager Configuration:
-1. Create a GTM container
-2. Add your GTM ID to `/src/content/analytics.ts`
-3. Configure GA4 within GTM (recommended approach)
-4. Set up custom events and conversion tracking in GTM interface
+### 1. **Create SEO Configuration**
+```json
+// src/content/seo/new-page.json
+{
+  "meta": {
+    "title": "New Page Title | Your Company",
+    "description": "Compelling description for search results (120-160 chars)",
+    "keywords": ["relevant", "keywords", "here"],
+    "robots": "index, follow",
+    "canonical": "https://yourdomain.com/new-page",
+    "openGraph": {
+      "type": "website", 
+      "image": "/og-new-page.jpg",
+      "imageAlt": "Page preview description"
+    }
+  },
+  "schema": {
+    "type": "WebPage", // or "Article", "Service", "Product"
+    "breadcrumbs": [
+      { "name": "Home", "url": "/" },
+      { "name": "New Page", "url": "/new-page" }
+    ]
+  }
+}
+```
 
-### Performance Benefits:
-- PartyTown integration moves scripts to web workers
-- Single analytics entry point reduces script loading
-- Professional setup preferred by enterprises
+### 2. **Create Page Content**
+```json
+// src/content/pages/new-page.json
+{
+  "hero": {
+    "heading": "New Page Heading",
+    "subheading": "Compelling subheading text",
+    "ctaText": "Call to Action",
+    "ctaUrl": "/contact"
+  },
+  "sections": [
+    {
+      "title": "Section Title",
+      "content": "Section content here...",
+      "image": {
+        "src": "/images/section-image.jpg",
+        "alt": "Descriptive alt text"
+      }
+    }
+  ]
+}
+```
+
+### 3. **Create the Page File**
+```astro
+---
+// src/pages/new-page.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { mergeSeoData } from '@/utils/seo';
+import { generateSchemas } from '@/utils/schema';
+import { getEntry } from 'astro:content';
+
+// Get SEO data and content
+const { metadata, schemaData } = await mergeSeoData('new-page');
+const pageContent = await getEntry('pages', 'new-page');
+
+// Generate structured data
+const schemas = await generateSchemas(schemaData, metadata);
+---
+
+<BaseLayout metadata={metadata} schemas={schemas}>
+  <main>
+    <section class="hero">
+      <h1>{pageContent.data.hero.heading}</h1>
+      <p>{pageContent.data.hero.subheading}</p>
+      <a href={pageContent.data.hero.ctaUrl}>
+        {pageContent.data.hero.ctaText}
+      </a>
+    </section>
+    
+    <!-- Add your page content here -->
+  </main>
+</BaseLayout>
+```
 
 ---
 
-## 🚀 Project Structure
+## 🎯 Technical SEO Features
+
+### ✅ **Complete SEO Implementation**
+- **Meta Tags**: Title, description, robots, keywords, author
+- **Open Graph**: Facebook, LinkedIn sharing optimization  
+- **Twitter Cards**: Twitter sharing with proper card types
+- **Schema.org**: Automatic JSON-LD structured data generation
+- **Canonical URLs**: Proper URL canonicalization across all pages
+- **Favicons**: Complete favicon implementation with all sizes
+- **Robots.txt**: Auto-generated robots.txt with sitemap reference
+- **Sitemap**: Auto-generated XML sitemap with proper priorities
+- **Site Verification**: Google, Bing, Pinterest verification support
+
+### ⚡ **Performance Optimization**
+- **Core Web Vitals**: Real-time LCP, FID, CLS, INP tracking
+- **Performance Budgets**: Automatic warnings for poor metrics
+- **Image Optimization**: WebP/AVIF generation, lazy loading, responsive images
+- **Compression**: Gzip + Brotli compression for all assets
+- **Caching**: Manual chunking, content hashing, cache-busting
+- **Resource Hints**: DNS prefetch, preconnect, preload directives
+
+### � **Analytics & Monitoring**
+- **Google Tag Manager**: Professional analytics setup with PartyTown
+- **Web Vitals Dashboard**: Performance monitoring and reporting
+- **Custom Events**: Navigation timing, interaction tracking
+- **Development Analytics**: Performance debugging in dev mode
+
+---
+
+## 🔧 Advanced Configuration
+
+### **Schema.org Customization**
+The template automatically generates rich structured data:
+
+```typescript
+// Supported schema types:
+- Organization Schema (business info, contact details)
+- WebSite Schema (with site search functionality)  
+- WebPage Schema (with breadcrumbs, author info)
+- Article Schema (for blog posts and articles)
+- Service Schema (for service pages)
+- FAQ Schema (structured Q&A data)
+- Product Schema (for e-commerce pages)
+- LocalBusiness Schema (for location-based businesses)
+```
+
+### **Performance Monitoring Setup**
+```typescript
+// src/content/analytics.ts
+export const analytics = {
+  gtm: {
+    id: 'GTM-XXXXXXX',
+    enabled: true,
+    partytown: true  // Moves scripts to web workers
+  },
+  webVitals: {
+    enabled: true,
+    debug: false,    // Set to true in development
+    budgets: {
+      lcp: 2500,     // Largest Contentful Paint (ms)
+      fid: 100,      // First Input Delay (ms)  
+      cls: 0.1       // Cumulative Layout Shift
+    }
+  }
+}
+```
+
+### **Content Validation Rules**
+```typescript
+// Custom validation rules
+const validationRules = {
+  title: { min: 30, max: 60 },           // Characters
+  description: { min: 120, max: 160 },   // Characters  
+  keywords: { max: 10 },                 // Count
+  content: { min: 300 },                 // Characters
+  headings: { required: ['h1'] },        // Required heading levels
+  images: { requireAlt: true }           // Alt text required
+}
+```
+
+---
+
+## � Project Structure
 
 ```text
 /
 ├── public/
-│   ├── favicon.svg
-│   └── humans.txt
+│   ├── favicon.svg                    # Main favicon
+│   └── humans.txt                     # Developer credits
 ├── src/
-│   ├── assets/
-│   │   ├── astro.svg
-│   │   ├── background.svg
-│   │   ├── favicons/
+│   ├── assets/                        # Optimized assets
+│   │   ├── favicons/                  # Complete favicon set
 │   │   └── styles/
-│   │       └── global.css
-│   ├── components/
-│   │   ├── Hero.astro
-│   │   ├── Steps.astro
-│   │   ├── ChooseUs.astro
-│   │   ├── Welcome.astro
-│   │   ├── Favicons.astro
-│   │   ├── analytics/
-│   │   │   ├── Clarity.astro
-│   │   │   ├── SiteVerification.astro
-│   │   │   └── TagManager.astro
-│   │   └── seo/
-│   │       ├── CommonMeta.astro
-│   │       ├── Meta.astro
-│   │       └── Schema.astro
-│   ├── content/
-│   │   ├── config.ts
-│   │   ├── analytics.ts
-│   │   ├── verification.ts
-│   │   ├── seo/
-│   │   │   ├── global.json
-│   │   │   ├── index.json
-│   │   │   ├── about.json
-│   │   │   └── contact.json
-│   │   └── pages/
-│   │       ├── index.json
-│   │       ├── about.json
-│   │       └── contact.json
+│   │       └── global.css             # Global styles
+│   ├── components/                    
+│   │   ├── analytics/                 # Analytics components
+│   │   │   ├── WebVitals.astro       # Core Web Vitals tracking
+│   │   │   ├── TagManager.astro      # GTM integration
+│   │   │   ├── Clarity.astro         # Microsoft Clarity
+│   │   │   └── SiteVerification.astro # Site verification
+│   │   ├── dev/                       # Development tools
+│   │   │   └── ValidationReport.astro # Content validation UI
+│   │   ├── performance/               # Performance optimization
+│   │   │   └── Performance.astro     # Performance hints & optimization
+│   │   ├── seo/                       # SEO components
+│   │   │   ├── Meta.astro            # Meta tags
+│   │   │   ├── Schema.astro          # Schema.org structured data
+│   │   │   └── CommonMeta.astro      # Common meta elements
+│   │   └── ui/                        # UI components
+│   │       ├── Hero.astro            # Hero section
+│   │       ├── Steps.astro           # Process steps
+│   │       ├── ChooseUs.astro        # Features section
+│   │       └── Welcome.astro         # Welcome section
+│   ├── content/                       # Content Collections
+│   │   ├── config.ts                 # Content schemas
+│   │   ├── analytics.ts              # Analytics configuration
+│   │   ├── verification.ts           # Site verification codes
+│   │   ├── seo/                      # SEO metadata
+│   │   │   ├── global.json           # Global SEO settings
+│   │   │   ├── index.json            # Homepage SEO
+│   │   │   ├── about.json            # About page SEO
+│   │   │   └── contact.json          # Contact page SEO
+│   │   └── pages/                    # Page content
+│   │       ├── index.json            # Homepage content
+│   │       ├── about.json            # About page content
+│   │       └── contact.json          # Contact page content
 │   ├── layouts/
-│   │   └── BaseLayout.astro
-│   ├── pages/
-│   │   ├── index.astro
-│   │   ├── about.astro
-│   │   └── contact.astro
-│   ├── types/
-│   │   └── seo.ts
-│   └── utils/
-│       └── seo.ts
+│   │   └── BaseLayout.astro          # Main layout with SEO
+│   ├── pages/                        # Route pages
+│   │   ├── index.astro               # Homepage
+│   │   ├── about.astro               # About page
+│   │   └── contact.astro             # Contact page
+│   ├── types/                        # TypeScript definitions
+│   │   ├── seo.ts                    # SEO types
+│   │   └── schema.ts                 # Schema.org types
+│   └── utils/                        # Utility functions
+│       ├── seo.ts                    # SEO utilities
+│       ├── schema.ts                 # Schema generation (400+ lines)
+│       ├── validation.ts             # Content validation (500+ lines)
+│       ├── vitals.ts                 # Web Vitals utilities
+│       └── assets.ts                 # Asset optimization
 └── package.json
 ```
 
@@ -220,29 +426,101 @@ src/content/
 
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+| Command | Action |
+|:--------|:-------|
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Start dev server at `localhost:4321` |
+| `pnpm build` | Build production site to `./dist/` |
+| `pnpm preview` | Preview build locally |
+| `pnpm astro ...` | Run Astro CLI commands |
+| `pnpm astro check` | Type check and validate |
 
 ---
 
-## 🌟 Why This Approach?
+## 🚀 Deployment
 
-- **Astro-Idiomatic:** Uses Content Collections as intended
-- **Performance First:** GTM + PartyTown for optimal loading
-- **Developer Friendly:** TypeScript validation and IntelliSense
-- **Scalable:** Easy to add new pages and content types
-- **Professional:** Industry standard analytics and SEO practices
+### **Build Output**
+The template produces optimized builds with:
+- **Compressed Assets**: Gzip + Brotli compression
+- **Chunked JavaScript**: Optimized loading with manual chunks
+- **Optimized Images**: WebP/AVIF generation with responsive sizes
+- **Performance Budget**: Automatic validation of Core Web Vitals
+
+```bash
+# Production build
+pnpm build
+
+# Preview production build
+pnpm preview
+```
+
+### **Vercel Deployment** (Recommended)
+```bash
+# Deploy to Vercel
+npx vercel
+
+# Or connect your GitHub repo to Vercel for automatic deployments
+```
+
+### **Other Platforms**
+The template works with any static hosting platform:
+- Netlify
+- Cloudflare Pages  
+- GitHub Pages
+- AWS S3 + CloudFront
 
 ---
 
-## 🤝 Credits
+## � Why This Template?
 
-Made with ❤️ by [Rick @ VPS](https://vertexplatformsolutions.com) for the web development community
+### **🏆 Performance First**
+- **Core Web Vitals Optimized**: Real-time monitoring and budget enforcement
+- **Enterprise-Grade Caching**: Manual chunking and compression strategies
+- **Image Optimization**: Automatic WebP/AVIF generation with responsive sizing
+
+### **🔍 SEO Excellence**
+- **Schema.org Mastery**: 400+ lines of structured data utilities
+- **Content Quality Assurance**: Real-time validation with actionable feedback
+- **Technical SEO Complete**: Meta tags, sitemaps, robots.txt, canonical URLs
+
+### **👨‍💻 Developer Experience**
+- **TypeScript Strict Mode**: Full type safety with auto-generated types
+- **Content Collections**: Type-safe content management with validation
+- **Interactive Development**: Real-time SEO and performance feedback
+
+### **📈 Production Ready**
+- **Analytics Integration**: GTM + PartyTown for professional tracking
+- **Quality Validation**: Automated content and SEO validation
+- **Scalable Architecture**: Easy to extend and maintain
+
+---
+
+## 📚 Learn More
+
+- [Astro Documentation](https://docs.astro.build)
+- [Content Collections](https://docs.astro.build/en/guides/content-collections/)
+- [Schema.org Documentation](https://schema.org)
+- [Core Web Vitals](https://web.dev/vitals/)
+- [Google Tag Manager](https://tagmanager.google.com)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🌟 Credits
+
+Made with ❤️ by [Rick @ VPS](https://vertexplatformsolutions.com) for the web development community.
+
+**Built with:**
+- [Astro](https://astro.build) - The web framework for content-driven websites
+- [TypeScript](https://www.typescriptlang.org) - Type-safe JavaScript
+- [web-vitals](https://github.com/GoogleChrome/web-vitals) - Core Web Vitals tracking
+- [PartyTown](https://partytown.builder.io) - Web worker analytics
