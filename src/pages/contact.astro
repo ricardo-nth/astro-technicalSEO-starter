@@ -1,9 +1,9 @@
 ---
 // Import layout
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteLayout from '@/layouts/SiteLayout.astro';
 
 // Import components
-import Welcome from '@/components/Welcome.astro';
+import Welcome from '@/components/sections/Welcome.astro';
 import EnhancedSchema from '@/components/seo/EnhancedSchema.astro';
 
 // Import page content from Content Collections
@@ -38,7 +38,7 @@ const metadata = {
 };
 ---
 
-<BaseLayout metadata={metadata}>
+<SiteLayout metadata={metadata}>
   <EnhancedSchema
     type={schema?.type || 'contact'}
     title={title || 'Contact - Technical SEO Starter'}
@@ -50,4 +50,4 @@ const metadata = {
   
   <h1>{hero?.heading || 'Contact Us'}</h1>
   <Welcome />
-</BaseLayout>
+</SiteLayout>

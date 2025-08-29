@@ -1,0 +1,112 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import NotificationBar from '../components/layout/NotificationBar.astro';
+import Navigation from '../components/layout/Navigation.astro';
+import Footer from '../components/layout/Footer.astro';
+
+// Import Types
+import type { MetaData } from '../types/seo';
+import type { SchemaData } from '../types/seo';
+
+export interface Props {
+  metadata?: MetaData;
+  schemaData?: SchemaData[];
+  showNotificationBar?: boolean;
+  notificationProps?: {
+    message?: string;
+    ctaText?: string;
+    ctaUrl?: string;
+    type?: 'info' | 'success' | 'warning' | 'announcement';
+    dismissible?: boolean;
+  };
+}
+
+const { 
+  metadata = {}, 
+  schemaData = [], 
+  showNotificationBar = true,
+  notificationProps = {}
+} = Astro.props;
+---
+
+<BaseLayout metadata={metadata} schemaData={schemaData}>
+  <div class="site-layout">
+    {showNotificationBar && <NotificationBar {...notificationProps} />}
+    <Navigation />
+    
+    <main class="main-content" role="main">
+      <slot />
+    </main>
+    
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  .site-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-content {
+    flex: 1;
+    width: 100%;
+  }
+
+  /* Ensure proper stacking context */
+  .site-layout > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Handle sticky navigation positioning */
+  .main-content {
+    /* Account for sticky navigation height if needed */
+    scroll-margin-top: 4rem;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Print styles */
+  @media print {
+    .notification-bar,
+    nav,
+    .footer-social,
+    .cta-button {
+      display: none !important;
+    }
+    
+    .site-layout {
+      min-height: auto;
+    }
+    
+    .main-content {
+      flex: none;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .site-layout {
+      background: white;
+      color: black;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
