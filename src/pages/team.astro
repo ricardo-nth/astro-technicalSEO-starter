@@ -3,6 +3,8 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 
 // Import components
+import StandardHero from '../components/ui/StandardHero.astro';
+import StandardCTA from '../components/ui/StandardCTA.astro';
 import EnhancedSchema from '../components/seo/EnhancedSchema.astro';
 
 // Import content utilities
@@ -88,63 +90,37 @@ const metadata = {
     ]}
   />
   
-  <!-- Team Hero Section -->
-  <section class="hero-section">
-    <!-- Background Pattern -->
-    <div class="hero-pattern"></div>
-    
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          Meet Our Amazing Team
-        </div>
-        
-        <h1 class="hero-title">
-          The <span class="gradient-text">Experts</span> Behind Your Success
-        </h1>
-        
-        <p class="hero-description">
-          Our diverse team of technical SEO specialists, developers, and strategists brings together decades of experience 
-          to deliver exceptional results for your business.
-        </p>
-        
-        <div class="hero-stats">
-          <div class="stat-card">
-            <div class="stat-icon stat-icon-blue">
-              <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div class="stat-number">{allTeamMembers.length}</div>
-            <div class="stat-label">Team Members</div>
-          </div>
-          
-          <div class="stat-card">
-            <div class="stat-icon stat-icon-green">
-              <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-              </svg>
-            </div>
-            <div class="stat-number">{departments.length}</div>
-            <div class="stat-label">Departments</div>
-          </div>
-          
-          <div class="stat-card">
-            <div class="stat-icon stat-icon-purple">
-              <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            </div>
-            <div class="stat-number">Expert</div>
-            <div class="stat-label">Level</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <StandardHero 
+    badge={{
+      icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+      text: "Meet Our Amazing Team"
+    }}
+    title="The Experts Behind Your Success"
+    highlightText="Experts"
+    description="Our diverse team of technical SEO specialists, developers, and strategists brings together decades of experience to deliver exceptional results for your business."
+    stats={[
+      {
+        icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+        number: allTeamMembers.length.toString(),
+        label: "Team Members",
+        color: "blue"
+      },
+      {
+        icon: "M13 6a3 3 0 11-6 0 3 3 0 616 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z",
+        number: departments.length.toString(),
+        label: "Departments",
+        color: "green"
+      },
+      {
+        icon: "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z",
+        number: "Expert",
+        label: "Level",
+        color: "purple"
+      }
+    ]}
+  />
+
+  <!-- Department Filter -->
 
   <!-- Department Filter -->
   <section class="filter-section">
@@ -297,47 +273,31 @@ const metadata = {
   </section>
 
   <!-- Join Our Team CTA -->
-  <section class="cta-section">
-    <!-- Background Pattern -->
-    <div class="cta-pattern"></div>
-    
-    <div class="container">
-      <div class="cta-content">
-        <div class="cta-badge">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-          </svg>
-          Join Our Team
-        </div>
-        
-        <h2 class="cta-title">
-          Ready to Make an <span class="gradient-text">Impact</span>?
-        </h2>
-        
-        <p class="cta-description">
-          We're always looking for talented individuals who share our passion for technical excellence and innovation. 
-          Join us in building the future of SEO and web performance.
-        </p>
-        
-        <div class="cta-buttons">
-          <a href="/contact" class="cta-btn cta-btn-primary">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-            </svg>
-            Get In Touch
-          </a>
-          
-          <a href="/about" class="cta-btn cta-btn-secondary">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-            </svg>
-            Learn More About Us
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <StandardCTA 
+    badge={{
+      icon: "M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z",
+      text: "Join Our Team"
+    }}
+    title="Ready to Make an Impact?"
+    highlightText="Impact"
+    description="We're always looking for talented individuals who share our passion for technical excellence and innovation. Join us in building the future of SEO and web performance."
+    buttons={[
+      {
+        text: "Get In Touch",
+        href: "/contact",
+        type: "primary",
+        icon: "M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884zM18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+      },
+      {
+        text: "Learn More About Us",
+        href: "/about",
+        type: "secondary",
+        icon: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+      }
+    ]}
+  />
+      ]}
+  />
 </SiteLayout>
 
 <!-- Font Awesome for Social Icons -->
@@ -736,131 +696,15 @@ const metadata = {
     color: #6b7280;
   }
 
-  /* CTA Section */
-  .cta-section {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #111827 0%, #1e3a8a 50%, #3730a3 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-pattern {
-    position: absolute;
-    inset: 0;
-    opacity: 0.1;
-    background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.3) 1px, transparent 0);
-    background-size: 40px 40px;
-  }
-
-  .cta-content {
-    max-width: 1024px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-  }
-
-  .cta-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 9999px;
-    background-color: rgba(59, 130, 246, 0.2);
-    color: #93c5fd;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 24px;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-  }
-
-  .cta-title {
-    font-size: 3rem;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 24px;
-  }
-
-  .cta-description {
-    font-size: 1.25rem;
-    color: #d1d5db;
-    margin-bottom: 40px;
-    line-height: 1.6;
-    max-width: 768px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .cta-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 448px;
-    margin: 0 auto;
-  }
-
-  .cta-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px 32px;
-    border-radius: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    transform: scale(1);
-  }
-
-  .cta-btn:hover {
-    transform: scale(1.05);
-  }
-
-  .cta-btn-primary {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    color: white;
-  }
-
-  .cta-btn-primary:hover {
-    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  }
-
-  .cta-btn-secondary {
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    background-color: transparent;
-    backdrop-filter: blur(4px);
-  }
-
-  .cta-btn-secondary:hover {
-    border-color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
   /* Responsive Design */
-  @media (min-width: 640px) {
-    .cta-buttons {
-      flex-direction: row;
-    }
-  }
-
   @media (min-width: 768px) {
     .hero-title {
-      font-size: 4rem;
-    }
-
-    .cta-title {
       font-size: 4rem;
     }
   }
 
   @media (min-width: 1024px) {
     .hero-title {
-      font-size: 5rem;
-    }
-
-    .cta-title {
       font-size: 5rem;
     }
   }
