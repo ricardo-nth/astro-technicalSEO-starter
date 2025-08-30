@@ -1,7 +1,7 @@
 # build output
 dist/
 .output/
-.vercel/
+# .vercel/ - Commented out to allow project config to be committed
 .netlify/
 
 # dependencies
@@ -76,3 +76,4 @@ pids
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/
+.vercel
