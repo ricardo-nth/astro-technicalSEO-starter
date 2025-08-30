@@ -4,10 +4,6 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
-  workflow_run:
-    workflows: ["CI"]
-    types: [completed]
-    branches: [ main ]
 
 jobs:
   test:
@@ -58,12 +54,6 @@ jobs:
     needs: test  # 🔒 SAFETY GATE: Only run if tests pass!
     
     steps:
-      - name: Check CI Success
-        if: github.event.workflow_run.conclusion != 'success'
-        run: |
-          echo "🚨 CI workflow failed - blocking deployment"
-          exit 1
-          
       - name: Environment Check
         run: |
           echo "🔍 Checking deployment configuration..."
