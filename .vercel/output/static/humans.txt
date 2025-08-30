@@ -1,0 +1,12 @@
+/* TEAM */
+Developer: Ricardo Ncube (@ricardonth)
+Site: https://pipefix.co.uk
+Twitter: https://twitter.com/rickdev
+
+/* THANKS */
+Tools: Astro, Tailwind, PartyTown, Preline
+Inspiration: https://humanstxt.org
+
+/* SITE */
+Standards: HTML5, CSS3, ES6
+Last update: 2025-07-06
