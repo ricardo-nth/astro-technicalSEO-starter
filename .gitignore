@@ -1,25 +1,49 @@
-# build output
+# Astro Technical SEO Starter - .gitignore
+# Optimized for Astro projects with Vercel deployment
+
+# Build output
 dist/
 .output/
-# .vercel/ - Commented out to allow project config to be committed
-.netlify/
 
-# dependencies
+# Deployment platforms
+.netlify/
+# .vercel/ - Project config committed for agentic deployment
+
+# Dependencies
 node_modules/
 
-# logs
+# Astro specific
+.astro/
+astro.config.mjs.timestamp-*
+
+# Environment variables
+.env*
+!.env.example
+!.env.sample
+
+# Package manager logs
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-# environment variables
-.env*
-!.env.example
-!.env.sample
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Cache directories
+.cache/
+.npm
+.eslintcache
+
+# Coverage reports
+coverage/
+*.lcov
+.nyc_output/
 
 # OS-specific files
 .DS_Store
@@ -27,22 +51,6 @@ lerna-debug.log*
 Thumbs.db
 ehthumbs.db
 Desktop.ini
-
-# Astro build artifacts
-.astro/
-astro.config.mjs.timestamp-*
-
-# Cache directories
-.cache/
-.parcel-cache/
-.next/
-.nuxt/
-.vuepress/
-
-# Coverage reports
-coverage/
-*.lcov
-.nyc_output/
 
 # IDE configuration
 .idea/
@@ -56,24 +64,5 @@ coverage/
 *.temp
 .temporary/
 
-# Playwright MCP screenshots (temporary)
+# Development tools
 .playwright-mcp/
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-.vercel
