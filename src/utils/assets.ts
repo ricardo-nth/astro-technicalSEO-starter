@@ -15,6 +15,8 @@ export interface ImageOptions {
   alt: string;
   loading?: 'lazy' | 'eager';
   decoding?: 'async' | 'auto' | 'sync';
+  formats?: ('webp' | 'avif' | 'png' | 'jpg' | 'jpeg')[];
+  priority?: boolean;
 }
 
 export interface ResponsiveImageOptions extends ImageOptions {
