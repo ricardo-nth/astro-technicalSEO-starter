@@ -10,10 +10,23 @@ This template uses **GitHub Actions** for enterprise-level deployment automation
 - ✅ **Multi-Platform**: Vercel, Netlify support with graceful fallbacks
 - ✅ **Performance Standards**: Lighthouse CI with realistic thresholds
 
-## 🚀 Quick Start (Vercel - Recommended)
+## 🚀 Quick Start (Vercel - Agentic Deployment)
 
-### Step 1: Get Vercel Credentials
+### Step 1: Connect GitHub Repository to Vercel
 
+**Option A: Via Vercel Dashboard (Recommended)**
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Click "Add New Project"
+3. Import `ricardo-nth/astro-technicalSEO-starter` from GitHub
+4. Use these settings:
+   ```
+   Framework Preset: Astro
+   Build Command: pnpm run build
+   Output Directory: dist
+   ```
+5. Click "Deploy" - this creates your project and gives you the project ID
+
+**Option B: Via Vercel CLI**
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -21,61 +34,85 @@ npm i -g vercel
 # Login to your Vercel account
 vercel login
 
-# Link your project (run in project root)
+# In your project directory, link to Vercel
 vercel link
+# Choose: "Link to existing project? N"
+# Project name: astro-technicalSEO-starter (or your preferred name)
+# In which directory is your code located? ./
 ```
 
-The `vercel link` command creates `.vercel/project.json` with your project details.
+### Step 2: Get Your Project IDs
 
-### Step 2: Extract Project Information
+After connecting via either method, you'll get a project ID. Your account details are:
 
-```bash
-# View your project details
-cat .vercel/project.json
+```yaml
+# Your Vercel Organization ID (already known)
+VERCEL_ORG_ID: team_jj7HmCYYrzvC70BvnK7ZYkoL
+
+# Your Project ID (get from step 1)
+# Will be something like: prj_ABC123xyz...
+
+# Your Team Name
+Team: "Ricardo Calcina's projects"
 ```
 
-You'll see something like:
-```json
-{
-  "projectId": "prj_abc123xyz",
-  "orgId": "team_def456uvw"
-}
-```
+### Step 3: Get Vercel API Token
 
-### Step 3: Get Vercel Token
+1. Go to [Vercel Account Settings → Tokens](https://vercel.com/account/tokens)
+2. Create token with "Full Account" scope
+3. Copy the token (save it securely!)
 
-1. Go to [Vercel Dashboard → Settings → Tokens](https://vercel.com/account/tokens)
-2. Create a new token with "Full Account" scope
-3. Copy the token (you'll only see it once!)
-
-### Step 4: Configure GitHub Repository
+### Step 4: Configure GitHub Repository Secrets & Variables
 
 Go to your GitHub repository → **Settings** → **Secrets and variables** → **Actions**
 
-**Repository Secrets** (sensitive data):
+**Repository Secrets** (sensitive):
 ```
-VERCEL_TOKEN=your_vercel_token_from_step_3
-```
-
-**Repository Variables** (non-sensitive data):
-```
-SITE_URL=https://yourdomain.com
-VERCEL_PROJECT_ID=prj_abc123xyz
-VERCEL_ORG_ID=team_def456uvw
-GTM_ID=GTM-XXXXXXX
-GA_ID=G-XXXXXXXXXX
+VERCEL_TOKEN=vercel_token_from_step_3
 ```
 
-### Step 5: Test Deployment
+**Repository Variables** (public):
+```
+SITE_URL=https://your-domain.com
+VERCEL_PROJECT_ID=prj_your_project_id_from_step_1
+VERCEL_ORG_ID=team_jj7HmCYYrzvC70BvnK7ZYkoL
+GTM_ID=GTM-XXXXXXX (optional)
+GA_ID=G-XXXXXXXXXX (optional)
+```
+
+### Step 5: Test Agentic Deployment
 
 ```bash
-# Push to main branch
+# Make any small change and push
+echo "# Testing agentic deployment" >> README.md
+git add README.md
+git commit -m "test: trigger agentic deployment"
 git push origin main
 
-# Watch GitHub Actions
-# Go to: GitHub repo → Actions tab
-# You should see: CI workflow → Production deployment
+# Watch the magic happen:
+# 1. GitHub Actions runs quality checks
+# 2. If all pass → Auto-deploys to Vercel
+# 3. You get a live URL immediately!
 ```
+
+## 🤖 **Agentic Features Enabled**
+
+With this setup, you get **fully automated deployments**:
+
+- **AI-driven quality gates**: TypeScript, Build, Performance checks
+- **Intelligent deployment**: Only deploys if all checks pass
+- **Zero-configuration domains**: Automatic SSL and CDN
+- **Performance monitoring**: Lighthouse CI with real-world thresholds
+- **Error tracking**: Production monitoring with Sentry integration
+- **Multi-environment**: Automatic staging/production environments
+
+## 💎 **Domain Suggestions**
+
+I checked domain availability for your template:
+- ✅ `astro-seo-starter.com` - Available for $10.81/year
+- ✅ `technical-seo-starter.com` - Available for $10.81/year
+
+You can purchase these directly through Vercel for seamless integration.
 
 ## 🔧 Advanced Configuration
 
