@@ -221,11 +221,14 @@ The Community Edition showcases our technical excellence and provides real produ
 
 ## 🤝 Community & Support
 
+## 🤝 Community & Support
+
 ### **Community Edition Support**
-- 📖 **Documentation**: Comprehensive guides and API reference
-- 🐛 **Issue Tracking**: GitHub issues for bug reports
-- 💬 **Discussions**: Community forum for questions and tips
-- 🔄 **Updates**: Regular optimizations and security patches
+- 📖 **[Changelog](./CHANGELOG.md)**: See the full history of features and improvements.
+- 🤖 **[AI Agent Guide](./AGENTS.md)**: For AI-assisted development and automation.
+- 🐛 **Issue Tracking**: GitHub issues for bug reports.
+- 💬 **Discussions**: Community forum for questions and tips.
+- 🔄 **Updates**: Regular optimizations and security patches.
 
 ### **Contributing**
 We welcome contributions to the Community Edition:
