@@ -35,5 +35,11 @@
   },
   "devDependencies": {
     "terser": "^5.43.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "path-to-regexp": "^6.3.0",
+      "devalue": "^5.3.2"
+    }
   }
 }
