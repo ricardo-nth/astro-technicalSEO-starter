@@ -47,10 +47,11 @@ export function generateCSP(config: CSPConfig = {}) {
     'connect-src': [
       "'self'",
       'https://www.google-analytics.com',
-      'https://region1.analytics.google.com',
+      'https://region1.google-analytics.com',
       'https://www.googletagmanager.com',
-      'https://o1234567890.ingest.sentry.io', // Replace with actual Sentry DSN
-      'https://www.clarity.ms'
+      'https://*.ingest.sentry.io',
+      'https://www.clarity.ms',
+      'https://c.clarity.ms'
     ],
     'frame-src': [
       "'none'" // Prevent framing attacks

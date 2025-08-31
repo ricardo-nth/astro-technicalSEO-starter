@@ -7,7 +7,8 @@ dist/
 
 # Deployment platforms
 .netlify/
-# .vercel/ - Project config committed for agentic deployment
+# Ignore local Vercel project metadata to avoid exposing org/project IDs
+.vercel/
 
 # Dependencies
 node_modules/
