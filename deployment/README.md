@@ -17,7 +17,7 @@ This template uses **GitHub Actions** for enterprise-level deployment automation
 **Option A: Via Vercel Dashboard (Recommended)**
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
 2. Click "Add New Project"
-3. Import `ricardo-nth/astro-technicalSEO-starter` from GitHub
+3. **Import your repository** from GitHub
 4. Use these settings:
    ```
    Framework Preset: Astro
@@ -37,23 +37,35 @@ vercel login
 # In your project directory, link to Vercel
 vercel link
 # Choose: "Link to existing project? N"
-# Project name: astro-technicalSEO-starter (or your preferred name)
+# Project name: your-project-name (choose your preferred name)
 # In which directory is your code located? ./
 ```
 
-### Step 2: Get Your Project IDs
+### Step 2: Get Your Vercel Project and Organization IDs
 
-After connecting via either method, you'll get a project ID. Your account details are:
+After connecting via either method, you'll need to find your IDs:
 
+**Get Your Organization ID:**
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Click on your team/account name in the top navigation
+3. Go to "Settings" → "General"
+4. Copy your "Team ID" (starts with `team_` for teams or `user_` for personal accounts)
+
+**Get Your Project ID:**
+1. In your Vercel dashboard, click on your project
+2. Go to "Settings" → "General"  
+3. Copy your "Project ID" (starts with `prj_`)
+
+Your configuration will look like:
 ```yaml
-# Your Vercel Organization ID (already known)
-VERCEL_ORG_ID: team_jj7HmCYYrzvC70BvnK7ZYkoL
+# Your Vercel Organization ID (from step above)
+VERCEL_ORG_ID: team_ABC123xyz... (or user_ABC123xyz...)
 
-# Your Project ID (get from step 1)
-# Will be something like: prj_ABC123xyz...
+# Your Project ID (from step above)
+VERCEL_PROJECT_ID: prj_ABC123xyz...
 
-# Your Team Name
-Team: "Ricardo Calcina's projects"
+# Your Team/Account Name
+Team: "Your Team Name"
 ```
 
 ### Step 3: Get Vercel API Token
@@ -74,8 +86,8 @@ VERCEL_TOKEN=vercel_token_from_step_3
 **Repository Variables** (public):
 ```
 SITE_URL=https://your-domain.com
-VERCEL_PROJECT_ID=prj_your_project_id_from_step_1
-VERCEL_ORG_ID=team_jj7HmCYYrzvC70BvnK7ZYkoL
+VERCEL_PROJECT_ID=prj_your_project_id_from_step_2
+VERCEL_ORG_ID=team_your_org_id_from_step_2
 GTM_ID=GTM-XXXXXXX (optional)
 GA_ID=G-XXXXXXXXXX (optional)
 ```
@@ -106,13 +118,27 @@ With this setup, you get **fully automated deployments**:
 - **Error tracking**: Production monitoring with Sentry integration
 - **Multi-environment**: Automatic staging/production environments
 
-## 💎 **Domain Suggestions**
+## 💎 **Domain Setup Guide**
 
-I checked domain availability for your template:
-- ✅ `astro-seo-starter.com` - Available for $10.81/year
-- ✅ `technical-seo-starter.com` - Available for $10.81/year
+### Finding Your Perfect Domain
 
-You can purchase these directly through Vercel for seamless integration.
+For your Astro SEO starter project, consider domains that reflect your business:
+
+**Domain Naming Tips:**
+- Include keywords like "seo", "starter", "astro" if relevant to your business
+- Keep it short and memorable
+- Use .com for best SEO results
+- Avoid hyphens and numbers
+
+**Check Domain Availability:**
+1. Use [Vercel Domains](https://vercel.com/domains) for seamless integration
+2. Or use [Namecheap](https://namecheap.com) / [GoDaddy](https://godaddy.com) for more options
+3. Expect $10-15/year for most .com domains
+
+**Vercel Domain Integration:**
+1. Purchase domain through Vercel dashboard
+2. Domain automatically configured with SSL and CDN
+3. No additional DNS configuration needed
 
 ## 🔧 Advanced Configuration
 
